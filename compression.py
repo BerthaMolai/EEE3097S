@@ -31,5 +31,5 @@ if __name__ == '__main__':
     with gzip.open(targetFileName, 'rb') as f:
         decomp_content = f.read() 
         #we can always write this data to a normal file
-    print(text== decomp_content)
+    print("Compressed and decompressed data the same?", text== decomp_content)
     #print(text== decompressedData)

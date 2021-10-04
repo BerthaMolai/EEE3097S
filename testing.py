@@ -24,20 +24,13 @@
 #    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #    SOFTWARE.
 #
+#   last modified by Bertha Molai, ~4/10/21
 import sys
 import os
-import subprocess
 import gzip
 import zlib
 import lzma
 import time
-
-CommonHeadCode = '#!/usr/bin/env python3\n'
-
-CommonTailCode = r'''
-if __name__ == "__main__":
-    print(Expand())
-'''
 
 #--------------------------------------------------------------------
 
@@ -47,9 +40,8 @@ AlgorithmList = [ gzip, zlib, lzma
 #--------------------------------------------------------------------
 
 if __name__ == '__main__':
-    #StubDirName = 'stubs'
 
-    # Create a directory to hold the generated source code.
+    # Create a directory to add zipped files
     OutputDirName = 'output'
     if not os.path.exists(OutputDirName):
         os.mkdir(OutputDirName)
@@ -67,6 +59,7 @@ if __name__ == '__main__':
     print('Read {} words, {} bytes.'.format(len(words), len(text)))
 
     bestSize = None
+    bestTime = None
     bestSourceCode = None
     times = []
     dectimes = []
@@ -79,7 +72,7 @@ if __name__ == '__main__':
             cTime = finish - start
             times.append(cTime)            
             #stubFileName = os.path.join(StubDirName, algorithm.Name() + '.py')
-            targetFileName = "sampleOut_" + algorithm.__name__ + ".csv"
+            targetFileName = os.path.join(OutputDirName, "sampleOut_" + algorithm.__name__ + ".csv." +algorithm.__name__)
             with open(targetFileName, 'wb') as outfile:
                 outfile.write(compressedDataCode)
             size = len(compressedDataCode)
@@ -100,12 +93,20 @@ if __name__ == '__main__':
         
         #print out compressed file size
         print('{:9d} {:s}'.format(size, targetFileName))
+        compRatio = len(text) / size
+        reduction = (1- size/len(text))*100
         avg = sum(times)/len(times)
         print("Average compression time: ", str(avg))
+        print("Compression ratio: " + str(int(compRatio)) + " with reduction of " + "{:.2f}".format(reduction) +"%")
+
+        if (bestTime is None) or (avg < bestTime):
+            bestTime = avg
+            bestTAlgorithm = algorithm
         
         avg_d = sum(dectimes)/len(dectimes)
         print("Average decompression time: ", str(avg_d))        
 
     print()
     print('The size winner is:', bestAlgorithm.__name__)
+    print('The time winner is:', bestTAlgorithm.__name__)
     sys.exit(0)
