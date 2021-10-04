@@ -21,6 +21,15 @@ if __name__ == '__main__':
     compressedDataCode = gzip.compress(text)
 
     #"sampleOut" will contain diff file names
-    targetFileName = "sampleOut_" + ".csv"
+    targetFileName = os.path.join(OutputDirName, "sampleOut_" + ".csv.gzip")
+
+    #targetFileName = "sampleOut_" + ".csv.gzip"
     with open(targetFileName, 'wb') as outfile:
         outfile.write(compressedDataCode)
+
+    #decompression and comparison
+    with gzip.open(targetFileName, 'rb') as f:
+        decomp_content = f.read() 
+        #we can always write this data to a normal file
+    print(text== decomp_content)
+    #print(text== decompressedData)
