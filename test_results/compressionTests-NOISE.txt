@@ -1,0 +1,19 @@
+output\sampleOut_gzip.csv.gzip
+output\sampleOut_lzma.csv.lzma
+output\sampleOut_zlib.csv.zlib
+Read 14939 words, 8470860 bytes.
+  3521347 output\sampleOut_gzip.csv.gzip
+Average compression time:  1.114673662185669
+Compression ratio: 2 with reduction of 58.43%
+Average decompression time:  0.05268571376800537
+  3539878 output\sampleOut_zlib.csv.zlib
+Average compression time:  0.8341000437736511
+Compression ratio: 2 with reduction of 58.21%
+Average decompression time:  0.043193924427032473
+  2752856 output\sampleOut_lzma.csv.lzma
+Average compression time:  3.0973780155181885
+Compression ratio: 3 with reduction of 67.50%
+Average decompression time:  0.13515084584554035
+
+The size winner is: lzma
+The time winner is: zlib
