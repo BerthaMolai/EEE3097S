@@ -1,3 +1,4 @@
+"""decyrption commented out"""
 import base64
 import string
 import timeit
@@ -34,19 +35,20 @@ def encrypt(filepath):
     #times the algorithm
     start = timeit.timeit()
 	#open with Gzipreader?
-
+    global fille2
     file1 = gzip.open("encrypted.gzip",mode = "wt")
-    #file2 = open("decrypted.gzip","w")
+    #fille2 = gzip.open("decrypted.gzip",mode = "wt")
     with gzip.open(filepath, mode='rt') as file:
     		for line in file:
         		translated = encode(secret_key, line) 
+                #decrypt = decode(secret_key, translated)
+                #dcpt = bytes(decrypt, encoding = 'utf-8')
         		file1.write(translated)
-        		#decrypt= decode(secret_key, translated)
-        		#file2.write(decrypt)
+                #fille2.write(dcpt)
 
     end = abs(timeit.timeit())
-    timeComplexity = start-end
-    print("Time Complexity of Algorithm to Encrypt the Data : " , timeComplexity)
+    #timeComplexity = start-end
+    #print("Time Complexity of Algorithm to Encrypt the Data : " , timeComplexity)
     print("Successfully Encrypted!")
     print("Decryption private key :", secret_key)
 
@@ -57,13 +59,13 @@ def decryption(encryptedFile) :
     key = input("Enter the private key: \n")
     if key==secret_key :
     #print(" Time Complexity of Algorithm for Decryption : " , timeComplexity)
-        file2 = gzip.open("decrypted.gzip",mode="wt")
+        """file2 = gzip.open("decrypted.gzip",mode="wt")
         with gzip.open(encryptedFile, mode='rt') as file:
             for line in file:
                 decrypt= decode(key, line)
                 file2.write(decrypt)
                 #print(translated)
-        print("Successfully Decrypted!")
+        print("Successfully Decrypted!")"""
         return "decrypted.gzip"
 
     else :

@@ -18,7 +18,7 @@ end = time.time()
 
 print("Time taken to compress and encyrpt: " +"{:.2f}".format(end - start) +"s" )
 
-gFile = input("Would you like to access your now?\n")
+gFile = input("Would you like to access your file now?\n")
 #
 if gFile == 'yes':
     #decryption here
