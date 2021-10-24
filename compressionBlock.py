@@ -29,9 +29,9 @@ def compressFile():
 
 def decompressFile(compressedFile):
     #decompression and comparison
-    with gzip.open(compressedFile, mode='rt') as f:
+    with gzip.open(compressedFile, mode='rt', encoding ='utf-8') as f:
         decomp_content = f.read() 
-        with open('systemOutput.csv', 'w') as fout:
+        with open('systemOutput.csv', 'w', encoding='utf-8') as fout:
             fout.write(decomp_content)
             #we can always write this data to a normal file
     print("Compressed and decompressed data the same?", text== decomp_content)

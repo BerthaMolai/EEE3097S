@@ -59,13 +59,13 @@ def decryption(encryptedFile) :
     key = input("Enter the private key: \n")
     if key==secret_key :
     #print(" Time Complexity of Algorithm for Decryption : " , timeComplexity)
-        """file2 = gzip.open("decrypted.gzip",mode="wt")
+        file2 = gzip.open("decrypted.gzip",mode="wt", encoding = 'utf-8')
         with gzip.open(encryptedFile, mode='rt') as file:
             for line in file:
                 decrypt= decode(key, line)
                 file2.write(decrypt)
                 #print(translated)
-        print("Successfully Decrypted!")"""
+        print("Successfully Decrypted!")
         return "decrypted.gzip"
 
     else :
