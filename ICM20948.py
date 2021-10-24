@@ -418,7 +418,7 @@ if __name__ == '__main__':
 
   file.close()
   end = time.time() - start
-  print('Time taken to read 100 sample: %.2f, s'% (end))
+  print("Time taken to read 100 sample: " + "{:.2f}".format(end) +"s")
     
 
 

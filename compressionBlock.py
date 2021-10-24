@@ -34,5 +34,5 @@ def decompressFile(compressedFile):
         with open('systemOutput.csv', 'w', encoding='utf-8') as fout:
             fout.write(decomp_content)
             #we can always write this data to a normal file
-    print("Compressed and decompressed data the same?", text== decomp_content)
+    print("Compressed and decompressed data the same?", text != decomp_content)
 
