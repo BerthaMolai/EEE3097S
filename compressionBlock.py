@@ -29,7 +29,7 @@ def compressFile():
 
 def decompressFile(compressedFile):
     #decompression and comparison
-    with gzip.open(compressedFile, mode='rt', encoding ='utf-8') as f:
+    with open(compressedFile, mode='rt', encoding ='utf-8') as f:
         decomp_content = f.read() 
         with open('systemOutput.csv', 'w', encoding='utf-8') as fout:
             fout.write(decomp_content)
