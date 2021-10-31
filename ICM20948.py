@@ -385,12 +385,12 @@ if __name__ == '__main__':
   file = open("IMUdata.csv", 'a')
   i = 0
   output = ["UTC_computer_time", "MagX", "MagY", "MagZ", "AccX", "AccY", "AccZ", "GyroX", "GyroY", "GyroZ", "Temp", "Pres", "Yaw", "Pitch", "Roll"]
-  file.write(output)
+  file.write(", ".join(output))
   while i<100:
     #read time & add to outputarr
     output.clear()
-    t = time.localtime()
-    output.append(t)  #appending time to line
+    t = time.ctime()
+    output.append(str(t))  #appending time to line
     icm20948.icm20948_Gyro_Accel_Read()
     icm20948.icm20948MagRead()
     icm20948.icm20948CalAvgValue()
@@ -402,13 +402,13 @@ if __name__ == '__main__':
     roll  = math.atan2(2 * q2 * q3 + 2 * q0 * q1, -2 * q1 * q1 - 2 * q2* q2 + 1)* 57.3
     yaw   = math.atan2(-2 * q1 * q2 - 2 * q0 * q3, 2 * q2 * q2 + 2 * q3 * q3 - 1) * 57.3
     
-    output.append(Mag)
-    output.append(Accel)
-    output.append(Gyro)
-    output.append(yaw)
-    output.append(pitch)
-    output.append(roll)
-    file.write(output)
+    output.append(' '.join(map(str, Mag)))
+    output.append(' '.join(map(str, Accel)))
+    output.append(' '.join(map(str, Gyro)))
+    output.append(str(round(yaw, 2)))
+    output.append(str(round(pitch, 2)))
+    output.append(str(round(roll, 2)))
+    file.write(' '.join(output))
     #print("\r\n /-------------------------------------------------------------/ \r\n")
     #print('\r\n Roll = %.2f , Pitch = %.2f , Yaw = %.2f\r\n'%(roll,pitch,yaw))
     #print('\r\nAcceleration:  X = %d , Y = %d , Z = %d\r\n'%(Accel[0],Accel[1],Accel[2]))  
@@ -418,7 +418,7 @@ if __name__ == '__main__':
 
   file.close()
   end = time.time() - start
-  print('Time taken to read 100 sample: %.2f, s', end)
+  print("Time taken to read 100 sample: " + "{:.2f}".format(end) +"s")
     
 
 

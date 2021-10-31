@@ -52,7 +52,7 @@ if __name__ == '__main__':
         print(fullname)
         os.remove(fullname)
 
-    with open('sample.csv', 'rb') as infile:
+    with open('IMUdata.csv', 'rb') as infile:
         text = infile.read()
 
     words = text.split()
