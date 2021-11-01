@@ -15,9 +15,19 @@ if __name__ == '__main__':
         print(fullname)
         os.remove(fullname)
 
-    with open('sample.csv', 'rb') as infile:
+    with open('IMUdata.csv', 'rb') as infile:
         text = infile.read()
+
+    #trying to read as string then turn to bytes
+    #with open('sample.csv', 'rt') as infile:
+        #txt = infile.read()
+
+    #print(txt)
+
+    #text = bytes(txt, 'utf-8')
     
+    #print("\n")
+    #print(text)
     compressedDataCode = gzip.compress(text)
 
     #"sampleOut" will contain diff file names
@@ -31,4 +41,9 @@ if __name__ == '__main__':
     with gzip.open(targetFileName, 'rb') as f:
         decomp_content = f.read() 
         #we can always write this data to a normal file
+
+        #need to change from bytes to text first
+        decomp_text = str(decomp_content)
+        with open('sampleout.csv', 'wt') as w:
+            w.write(decomp_text)
     print("Compressed and decompressed data the same?", text== decomp_content)

@@ -51,7 +51,6 @@ def encrypt(filepath):
     #print("Time Complexity of Algorithm to Encrypt the Data : " , timeComplexity)
     print("Successfully Encrypted!")
     print("Decryption private key :", secret_key)
-
     return "encrypted.gzip"
 
 def decryption(encryptedFile) :
@@ -59,15 +58,20 @@ def decryption(encryptedFile) :
     key = input("Enter the private key: \n")
     if key==secret_key :
     #print(" Time Complexity of Algorithm for Decryption : " , timeComplexity)
-        file2 = gzip.open("decrypted.gzip",mode="wt", encoding = 'utf-8')
-        with gzip.open(encryptedFile, mode='rt') as file:
-            for line in file:
-                decrypt= decode(key, line)
-                file2.write(decrypt)
-                #print(translated)
+        file2 = open("decrypted.txt",mode="wb")
+        with gzip.open(encryptedFile, mode='rb') as file:
+            #for line in file:
+            #write to compressed file
+            decrypt= decode(key, file.read())
+            #print(decrypt)
+
+            #decrypted but compressed bytes
+            filecontent = bytes(decrypt, encoding = 'utf-8')
+            file2.write(filecontent)
+            #print(translated)
         print("Successfully Decrypted!")
-        return "decrypted.gzip"
+        return "decrypted.txt"
 
     else :
         print("Invalid Key, Cannot decrypt the data.")
-        return None
+        return decryption(encryptedFile)

@@ -17,7 +17,6 @@ def compressFile():
     compressedDataCode = gzip.compress(text)
 
     global targetFileName
-    #"sampleOut" will contain diff file names
     targetFileName = os.path.join(OutputDirName, "sampleOut_" + ".csv.gzip")
 
     #targetFileName = "sampleOut_" + ".csv.gzip"
@@ -29,10 +28,14 @@ def compressFile():
 
 def decompressFile(compressedFile):
     #decompression and comparison
-    with open(compressedFile, mode='rt', encoding ='utf-8') as f:
+    with open(compressedFile, mode='rb') as f:
         decomp_content = f.read() 
-        with open('systemOutput.csv', 'w', encoding='utf-8') as fout:
-            fout.write(decomp_content)
+        with open('systemOutput.csv', 'wt', encoding='utf-8') as fout:
+            fout.write(str(decomp_content))
             #we can always write this data to a normal file
-    print("Compressed and decompressed data the same?", text != decomp_content)
+    #print(text) 
+    ##returns true if if '\r\n' is removed from txt file       
+    #print("Compressed and decompressed data the same?", text == decomp_content)
+
+
 
