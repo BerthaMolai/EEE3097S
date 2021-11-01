@@ -70,4 +70,4 @@ def decryption(encryptedFile) :
 
     else :
         print("Invalid Key, Cannot decrypt the data.")
-        return None
+        return decryption(encryptedFile)
